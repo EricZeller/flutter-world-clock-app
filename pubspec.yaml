@@ -81,7 +81,7 @@ flutter:
         - asset: fonts/Red_Hat_Display/RedHatDisplay-VariableFont_wght.ttf
           style: italic
 
-    - family: Trajan Pro
+    - family: Pacifico
       fonts:
         - asset: fonts/Pacifico/Pacifico-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
