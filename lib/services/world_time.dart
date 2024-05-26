@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WorldTime {
   String location, time = "", flag, url;
+  late bool isDaytime;
 
   WorldTime({required this.location, required this.flag, required this.url});
 
@@ -18,7 +21,8 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: int.parse(offset)));
 
-      time = now.toString();
+      isDaytime = now.hour > 6 && now.hour < 20;
+      time = DateFormat.Hm().format(now);
     } catch (e) {
       print("error: $e");
       time = "Error: could not get time data";

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:world_clock/services/world_time.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       "location": instance.location,
       "flag": instance.flag,
       "time": instance.time,
+      "isDaytime": instance.isDaytime,
     });
   }
 
@@ -29,10 +31,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(50),
-        child: Text("Loading..."),
-      ),
+      body: Center(
+          child: SpinKitFadingCircle(
+        color: Colors.lightBlue[900],
+        size: 40.0,
+      )),
     );
   }
 }
