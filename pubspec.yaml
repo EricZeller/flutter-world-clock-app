@@ -1,5 +1,5 @@
 name: world_clock
-description: "A new Flutter project."
+description: "World clock written in Flutter"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   rename: ^3.0.2
   dynamic_color: ^1.7.0
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:

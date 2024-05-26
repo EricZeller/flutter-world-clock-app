@@ -5,7 +5,7 @@ import 'package:world_clock/pages/location.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  initialRoute: '/home',
+  initialRoute: '/',
   routes: {
     '/': (context) => LoadingScreen(),
     '/home': (context) => Home(),
