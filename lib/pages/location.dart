@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:world_clock/services/world_time.dart';
 
 class ChooseLocation extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
         url: 'Australia/Melbourne', location: 'Melbourne', flag: 'au.png'),
     WorldTime(
         url: 'Africa/Johannesburg', location: 'Johannesburg', flag: 'za.png'),
-    WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'eg.png')
+    WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'eg.png'),
   ];
 
   void updateTime(index) async {
@@ -49,37 +50,70 @@ class _ChooseLocationState extends State<ChooseLocation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Choose a location",
-          style: TextStyle(
-              fontFamily: "Red Hat Display", fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              onTap: () {
-                updateTime(index);
-              },
-              title: Text(locations[index].location),
-              leading: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                    0.0), // Anpassen der Rundung, z.B. 4.0 für leicht abgerundete Ecken
-                child: Image.asset(
-                  'assets/flags/${locations[index].flag}',
-                  width: 40,
-                  fit: BoxFit.cover, // Optional, um das Bild zuzuschneiden
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        // Verwende dynamische Farben oder Fallback-Farbschemata
+        ColorScheme lightColorScheme =
+            lightDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+        ColorScheme darkColorScheme =
+            darkDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+
+        // Wähle das Farbschema basierend auf dem aktuellen Systemthema
+        bool isLightMode = Theme.of(context).brightness == Brightness.light;
+        ColorScheme colorScheme =
+            isLightMode ? lightColorScheme : darkColorScheme;
+
+        ThemeData themeData = ThemeData(
+          colorScheme: colorScheme,
+          useMaterial3: true, // Optional: Aktiviert Material 3 Design
+        );
+
+        return Theme(
+          data: themeData,
+          child: Scaffold(
+            backgroundColor: colorScheme.secondaryContainer,
+            appBar: AppBar(
+              title: Text(
+                "Choose a location",
+                style: TextStyle(
+                  fontFamily: "Red Hat Display",
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onPrimary,
                 ),
               ),
+              centerTitle: true,
+              backgroundColor: colorScheme.primary,
             ),
-          );
-        },
-        itemCount: locations.length,
-      ),
+            body: ListView.builder(
+              itemCount: locations.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  color: colorScheme.primaryFixed,
+                  child: ListTile(
+                    onTap: () {
+                      updateTime(index);
+                    },
+                    title: Text(
+                      locations[index].location,
+                      style: TextStyle(color: colorScheme.onPrimaryFixed),
+                    ),
+                    leading: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(0.0), // Anpassung der Rundung
+                      child: Image.asset(
+                        'assets/flags/${locations[index].flag}',
+                        width: 40,
+                        fit:
+                            BoxFit.cover, // Optional, um das Bild zuzuschneiden
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }

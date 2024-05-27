@@ -19,7 +19,7 @@ class WorldTime {
 
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(hours: int.parse(offset)));
-
+      isDaytime = true;
       isDaytime = now.hour > 6 && now.hour < 20;
       time = DateFormat.Hm().format(now);
     } catch (e) {
