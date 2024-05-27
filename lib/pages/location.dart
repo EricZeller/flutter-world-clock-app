@@ -15,13 +15,13 @@ class _ChooseLocationState extends State<ChooseLocation> {
     WorldTime(url: 'Europe/London', location: 'London', flag: 'gb.png'),
     WorldTime(url: 'Europe/Moscow', location: 'Moscow', flag: 'ru.png'),
     WorldTime(url: 'Europe/Paris', location: 'Paris', flag: 'fr.png'),
+    WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'us.png'),
     WorldTime(url: 'America/New_York', location: 'New York', flag: 'us.png'),
     WorldTime(
         url: 'America/Los_Angeles', location: 'Los Angeles', flag: 'us.png'),
     WorldTime(url: 'America/Sao_Paulo', location: 'São Paulo', flag: 'br.png'),
     WorldTime(
         url: 'America/Mexico_City', location: 'Mexico City', flag: 'mx.png'),
-    WorldTime(url: 'America/Chicago', location: 'Chicago', flag: 'us.png'),
     WorldTime(url: 'America/Toronto', location: 'Toronto', flag: 'ca.png'),
     WorldTime(url: 'Asia/Tokyo', location: 'Tokyo', flag: 'jp.png'),
     WorldTime(url: 'Asia/Shanghai', location: 'Shanghai', flag: 'cn.png'),
@@ -35,6 +35,17 @@ class _ChooseLocationState extends State<ChooseLocation> {
         url: 'Africa/Johannesburg', location: 'Johannesburg', flag: 'za.png'),
     WorldTime(url: 'Africa/Cairo', location: 'Cairo', flag: 'eg.png')
   ];
+
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    await instance.getTime();
+    Navigator.pop(context, {
+      "location": instance.location,
+      "flag": instance.flag,
+      "time": instance.time,
+      "isDaytime": instance.isDaytime,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +62,18 @@ class _ChooseLocationState extends State<ChooseLocation> {
         itemBuilder: (context, index) {
           return Card(
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                updateTime(index);
+              },
               title: Text(locations[index].location),
-              leading: CircleAvatar(
-                backgroundImage:
-                    AssetImage('assets/flags/${locations[index].flag}'),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                    0.0), // Anpassen der Rundung, z.B. 4.0 für leicht abgerundete Ecken
+                child: Image.asset(
+                  'assets/flags/${locations[index].flag}',
+                  width: 40,
+                  fit: BoxFit.cover, // Optional, um das Bild zuzuschneiden
+                ),
               ),
             ),
           );

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WorldTime {
   String location, time = "", flag, url;
