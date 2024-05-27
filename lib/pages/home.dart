@@ -23,16 +23,16 @@ class _HomeState extends State<Home> {
       builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
         // Use dynamic colors or fallback to default color schemes
         ColorScheme lightColorScheme =
-            lightDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+            lightDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.lightBlue);
         ColorScheme darkColorScheme =
-            darkDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+            darkDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blueGrey);
 
         // Choose color scheme based on whether it's daytime or not
         ColorScheme colorScheme =
             data['isDaytime'] ? lightColorScheme : darkColorScheme;
 
         return Scaffold(
-          backgroundColor: colorScheme.surface,
+          backgroundColor: colorScheme.secondaryContainer,
           body: SafeArea(
             child: Stack(
               children: [
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
                             style: TextStyle(
                               fontSize: 48,
                               letterSpacing: 2,
-                              color: colorScheme.onSurface,
+                              color: colorScheme.onSecondaryContainer,
                               fontFamily: "Pacifico",
                             ),
                           ),
@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
                         data['time'],
                         style: TextStyle(
                             fontSize: 90,
-                            color: colorScheme.onSurface,
+                            color: colorScheme.onSecondaryContainer,
                             fontFamily: "Red Hat Display"),
                       ),
                       TextButton.icon(
