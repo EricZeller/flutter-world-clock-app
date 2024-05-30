@@ -88,14 +88,14 @@ class _ChooseLocationState extends State<ChooseLocation> {
               itemCount: locations.length,
               itemBuilder: (context, index) {
                 return Card(
-                  color: colorScheme.primaryFixed,
+                  color: colorScheme.secondaryFixed,
                   child: ListTile(
                     onTap: () {
                       updateTime(index);
                     },
                     title: Text(
                       locations[index].location,
-                      style: TextStyle(color: colorScheme.onPrimaryFixed),
+                      style: TextStyle(color: colorScheme.onSecondaryFixed),
                     ),
                     leading: ClipRRect(
                       borderRadius:
