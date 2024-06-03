@@ -23,7 +23,6 @@ class WorldTime {
       isDaytime = now.hour > 6 && now.hour < 20;
       time = DateFormat.Hm().format(now);
     } catch (e) {
-      print("error: $e");
       time = "Error: could not get time data";
     }
   }

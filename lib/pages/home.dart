@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         data['time'],
                         style: TextStyle(

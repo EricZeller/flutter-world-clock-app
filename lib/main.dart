@@ -7,8 +7,8 @@ void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
   initialRoute: '/',
   routes: {
-    '/': (context) => LoadingScreen(),
-    '/home': (context) => Home(),
-    '/location': (context) => ChooseLocation()
+    '/': (context) => const LoadingScreen(),
+    '/home': (context) => const Home(),
+    '/location': (context) => const ChooseLocation()
   },
 ));
